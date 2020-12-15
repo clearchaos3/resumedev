@@ -1,9 +1,25 @@
 language: node_js
 node_js:
   - "stable"
-cache:
-  directories:
-  - node_modules
-script:
-  - npm test
-  - npm run build
+
+jobs:
+  include:
+    - name: API
+      before_install:
+        - cd api
+      script:
+        - npm test
+        - npm run build
+      cache:
+        directories:
+          - node_modules
+    - name: UI
+      before_install:
+        - cd ui
+      script:
+        - npm test
+        - npm run build
+      cache:
+        directories:
+          - node_modules
+    
